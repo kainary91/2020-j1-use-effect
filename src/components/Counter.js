@@ -1,7 +1,14 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import styled from "styled-components/macro";
 
 export default function Counter({count,countUp,countDown}) {
+    useEffect(() => {
+        console.log("counter mounted");
+        return () => {
+            console.log("counter eliminated");
+        }
+    }, [])
+
     return <StyledCounter>
         <h1>Count: {count}</h1>
         <div>
