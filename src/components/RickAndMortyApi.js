@@ -7,11 +7,12 @@ export default function RickAndMortyApi() {
 
     useEffect(() => {
         axios
-            .get('https://rickandmortyapi.com/api/character/2')
+            .get('https://rickandmortyapi.com/api/character/')
             .then(function (response) {
                 // handle success
                 console.log(response.data);
-                setCharacter(response.data);
+                console.log(response.data.results)
+                setCharacter(response.data.results);
             })
             .catch(function (error) {
                 // handle error
@@ -19,13 +20,12 @@ export default function RickAndMortyApi() {
             });
     }, []);
 
-    const [character, setCharacter] = useState([])
+    const [characters, setCharacter] = useState([])
 
-    const {name, id} = character;
+    // const {name} = characters;
 
 
     return<div>
-        {name}
-        {id}
+        {characters.map(entry => <p>{entry.id}</p>)}
     </div>
 }
