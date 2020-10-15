@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import GlobalStyle from "./GlobalStyle";
 import Counter from "./components/Counter";
+import RickAndMortyApi from "./components/RickAndMortyApi";
 
 export default function App() {
     const [count,setCount] = useState(0);
@@ -19,6 +20,7 @@ export default function App() {
       <>
         <GlobalStyle/>
         <Main>
+            <RickAndMortyApi />
             {(count <= 10 && count >= -10)  && <Counter count={count}
                       countUp={countUp}
                       countDown={countDown}/>}
