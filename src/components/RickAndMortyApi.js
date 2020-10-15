@@ -1,31 +1,36 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
+export default function RickAndMortyApi({counter}) {
 
-export default function RickAndMortyApi() {
-    // const axios = require('axios').default;
+    const [character,setCharacter] = useState([]);
+
+    let url = "https://rickandmortyapi.com/api/character/" + counter
 
     useEffect(() => {
-        axios
-            .get('https://rickandmortyapi.com/api/character/')
+
+        axios.get(url)
             .then(function (response) {
                 // handle success
-                console.log(response.data);
-                console.log(response.data.results)
-                setCharacter(response.data.results);
+                setCharacter(response.data);
             })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-    }, []);
-
-    const [characters, setCharacter] = useState([])
-
-    // const {name} = characters;
+            .catch(function(error) {
+                console.log(error)})
+    }, [counter])
 
 
-    return<div>
-        {characters.map(entry => <p>{entry.id}</p>)}
-    </div>
+    const {id, name,status, species,type,gender,image} = character;
+
+
+    let message = id + " " + name + " " + status + " " + species + " " + type + " " + gender
+
+    return <section>
+
+        <h1>{message}</h1>
+        <img src={image} alt="bild"/>
+
+    </section>
+
 }
+
+
