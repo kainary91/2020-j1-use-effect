@@ -3,33 +3,17 @@ import styled from 'styled-components';
 import GlobalStyle from "./GlobalStyle";
 import Counter from "./components/Counter";
 import RickAndMortyApi from "./components/RickAndMortyApi";
+import Homepage from "./components/Homepage/Homepage";
 
 export default function App() {
-    const [count,setCount] = useState(1);
-    const countUp = () => setCount(count + 1);
-    const countDown = () => setCount(count - 1);
-
-    useEffect(() => {
-        if (count > 0 && count <= 10) {
-            console.log("counter change: " + count);
-        }
-        if (count < 0 || count > 10) {
-            return () => {
-                console.log("counter terminated")
-            }
-        }
-    }, [count])
 
     return (
         <>
             <GlobalStyle/>
             <Main>
 
-                <RickAndMortyApi counter={count}/>
+                <Homepage/>
 
-                <Counter count={count}
-                         countUp={countUp}
-                         countDown={countDown}/>
             </Main>
         </>
     );

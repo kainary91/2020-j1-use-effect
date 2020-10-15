@@ -1,11 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import Homepage from "./Homepage/Homepage";
 
-export default function RickAndMortyApi({counter}) {
+export default function RickAndMortyApi() {
 
+    const [count,setCount] = useState(1);
+    const countUp = () => setCount(count + 1);
+    const countDown = () => setCount(count - 1);
+
+    const [visible,setVisible] = useState(true)
     const [character,setCharacter] = useState([]);
 
-    let url = "https://rickandmortyapi.com/api/character/" + counter
+    let url = "https://rickandmortyapi.com/api/character/" + count
 
     useEffect(() => {
 
@@ -16,21 +22,33 @@ export default function RickAndMortyApi({counter}) {
             })
             .catch(function(error) {
                 console.log(error)})
-    }, [counter])
-
+    }, [count])
 
     const {id, name,status, species,type,gender,image} = character;
-
-
     let message = id + " " + name + " " + status + " " + species + " " + type + " " + gender
 
-    return <section>
 
-        <h1>{message}</h1>
-        <img src={image} alt="bild"/>
+    if (visible) {
+        return <section>
 
-    </section>
+            <h1>{message}</h1>
+            <img src={image} alt="bild"/>
+
+            <button onClick={countDown}>Last Character</button>
+            <button onClick={countUp}>Next Character</button>
+            <button onClick={() => setVisible(!visible)}>Back to Homepage</button>
+        </section>
+    } else
+    {
+        return <section>
+
+            <Homepage/>
+
+        </section>
+    }
 
 }
+
+
 
 
